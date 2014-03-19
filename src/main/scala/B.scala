@@ -1,7 +1,3 @@
-/**
-  */
-trait B /*extends A */{
-  def f1 {new A {}}
-  def f2 { new C {}}
-//  def f = new A {}.f
+object B extends App {
+  new CachedMap[String, String]() with VersionedCachedMap[String, String, Option]
 }
