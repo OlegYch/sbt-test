@@ -5,11 +5,12 @@ object Build extends sbt.Build {
 
   lazy val root = Project("sbt-test", file(".")).settings(
     testIncrementalCompile <<= (Keys.state, Keys.streams) map tic,
-    Keys.incOptions ~= (_.copy(recompileAllFraction = 100).withNameHashing(false)),
+    Keys.incOptions ~= (_.copy(recompileAllFraction = 100, apiDebug = true).withNameHashing(true)),
     Keys.scalaVersion := "2.10.4-RC3",
     runFixed := {
      val _ = (Keys.run in Compile).toTask("").value
-    }
+    },
+    Keys.logLevel in Keys.compile := Level.Debug
   )
   lazy val runFixed = taskKey[Unit]("A task that hard codes the values to `run`")
 
